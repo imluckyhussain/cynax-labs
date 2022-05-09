@@ -1,0 +1,17 @@
+.formGroup {
+  max-width: 400px;
+
+  @media screen and (min-width: 1024px) {
+    width: calc(100vw / 4);
+  }
+
+  input, select, div[role=button], .typeLabel[data-shrink="false"] {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .typeLabel:not([data-shrink="false"]) {
+    line-height: 2.2;
+    padding-left: 15px;
+  }
+}

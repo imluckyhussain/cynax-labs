@@ -1,0 +1,40 @@
+.box {
+  position: relative;
+  margin: .75em auto 0;
+  padding: 20px;
+  width: calc(100% - 40px - 1em);
+  line-height: 40px;
+  font: 1em trebuchet ms, verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.drinks {
+    color: #666;
+  }
+
+  .closeBtn {
+    display: none;
+  }
+}
+
+.box:hover {
+  .closeBtn {
+    display: inline;
+    max-height: 40px;
+  }
+}
+
+.ticketDetails {
+  display: flex;
+  height: 40px;
+  align-items: center;
+
+  svg {
+    margin-right: 15px;
+  }
+}
+
+.divider {
+  margin: 0 10px;
+}
