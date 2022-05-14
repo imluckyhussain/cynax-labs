@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Head } from 'next'
+import Head from 'next/head'
 import { Grid, Button } from '@mui/material';
 import TicketItem from '../components/molecules/ticket-item';
 import NewTicketDialog from '../components/molecules/new-ticket-dialog';
