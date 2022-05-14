@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import cn from 'classnames';
 import { Paper, IconButton, Tooltip, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -13,8 +14,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function TicketItem({ ticket, deleteHandler }) {
+  const [deleting, setDeleting] = useState(false);
+
+  const deleteProcess = async () => {
+    await setDeleting(true);
+    setTimeout(async () => {
+      await setDeleting(false);
+      deleteHandler();
+    }, 250);
+  };
+
   return (
-    <Item elevation={6} className={cn(styles.box, styles[ticket.type])}>
+    <Item elevation={6} className={cn(styles.box, styles[ticket.type], deleting && styles.deleting)}>
       <div className={styles.ticketDetails}>
         {
           ticket.type === 'food' ? <RestaurantMenuIcon /> : 
@@ -24,7 +35,7 @@ export default function TicketItem({ ticket, deleteHandler }) {
         <Divider orientation='vertical' className={styles.divider} />
         {`$${ticket.unitPrice}/unit`}
       </div>
-      <IconButton size="medium" onClick={deleteHandler} className={styles.closeBtn}>
+      <IconButton size="medium" onClick={deleteProcess} className={styles.closeBtn}>
         <Tooltip title="Delete Ticket"><Close /></Tooltip>
       </IconButton>
     </Item>

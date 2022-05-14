@@ -31,7 +31,7 @@ export default function Home({ fullScreen }) {
       </Head>
 
       <h3 className={styles.heading}>Available Tickets</h3>
-      <Grid container spacing={3}>
+      <Grid className={styles.tickets} container spacing={3}>
         {tickets.map((ticket, index) => (
           <Grid item key={index} xs={12} md={6} lg={4}>
             <TicketItem ticket={ticket} deleteHandler={() => deleteHandler(index)} />

@@ -4,15 +4,25 @@
 
 .heading {
   text-align: center;
+  font-size: 1.4rem;
+}
+
+.tickets {
+  justify-content: center;
 }
 
 .deleteInfo {
   color: #999;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 button.addTickets {
   display: table;
   margin: 40px auto 20px;
+  transition: ease-in-out 0.25s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }

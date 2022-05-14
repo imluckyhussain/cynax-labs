@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Input,
   Select,
@@ -12,8 +12,13 @@ import {
   FormControl,
   FormGroup,
   InputLabel,
+  Slide,
 } from '@mui/material';
 import styles from './new-ticket-dialog.module.scss';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit }) {
   const [type, setType] = useState('');
@@ -21,6 +26,15 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
   const [errorText, setErrorText] = useState('');
+
+  const resetDialog = () => {
+    onClose();
+    setType('');
+    setProduct('');
+    setQuantity(0);
+    setUnitPrice(0);
+    setErrorText('');
+  };
 
   const handleSubmit = () => {
     if (type && product && quantity && unitPrice) {
@@ -30,14 +44,9 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
         quantity,
         unitPrice,
       });
-      onClose();
-      setType('');
-      setProduct('');
-      setQuantity(0);
-      setUnitPrice(0);
-      setErrorText('');
+      resetDialog();
     } else {
-      setErrorText('Please fill all the fields');
+      setErrorText('Please fill all the fields!');
     }
   };
 
@@ -46,6 +55,8 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
       open={open}
       onClose={onClose}
       fullScreen={fullScreen}
+      className={styles.dialog}
+      TransitionComponent={Transition}
     >
       <DialogTitle>Add New Ticket</DialogTitle>
       <DialogContent>
@@ -89,7 +100,7 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
         </FormHelperText>
       )}
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={resetDialog}>Cancel</Button>
         <Button
           color="primary"
           variant="contained"
