@@ -5,14 +5,14 @@ import {
   Button,
   Dialog,
   MenuItem,
+  FormHelperText,
   DialogActions,
   DialogContent,
   DialogTitle,
   FormControl,
   FormGroup,
   InputLabel,
-  FormHelperText,
-} from '@mui/material/';
+} from '@mui/material';
 import styles from './new-ticket-dialog.module.scss';
 
 export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit }) {
@@ -20,19 +20,25 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
   const [product, setProduct] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
+  const [errorText, setErrorText] = useState('');
 
   const handleSubmit = () => {
-    onSubmit({
-      type,
-      product,
-      quantity,
-      unitPrice,
-    });
-    onClose();
-    setType('');
-    setProduct('');
-    setQuantity(0);
-    setUnitPrice(0);
+    if (type && product && quantity && unitPrice) {
+      onSubmit({
+        type,
+        product,
+        quantity,
+        unitPrice,
+      });
+      onClose();
+      setType('');
+      setProduct('');
+      setQuantity(0);
+      setUnitPrice(0);
+      setErrorText('');
+    } else {
+      setErrorText('Please fill all the fields');
+    }
   };
 
   return (
@@ -77,6 +83,11 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
           </FormControl>
         </FormGroup>
       </DialogContent>
+      {errorText && (
+        <FormHelperText className={styles.errorText} error>
+          {errorText}
+        </FormHelperText>
+      )}
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
         <Button
