@@ -31,9 +31,10 @@ export default function TicketItem({ ticket, deleteHandler }) {
           ticket.type === 'food' ? <RestaurantMenuIcon /> : 
           (ticket.type === 'drinks' ? <LocalCafeIcon /> : undefined)
         }
-        {`${ticket.product.toUpperCase()} (${ticket.quantity} left)`}
+        <span className={styles.item}>{ticket.product.toUpperCase()}</span>
+        &nbsp;{`(${ticket.quantity} left)`}
         <Divider orientation='vertical' className={styles.divider} />
-        {`$${ticket.unitPrice}/unit`}
+        <span className={styles.amount}>${ticket.unitPrice}</span>/unit
       </div>
       <IconButton size="medium" onClick={deleteProcess} className={styles.closeBtn}>
         <Tooltip title="Delete Ticket"><Close /></Tooltip>

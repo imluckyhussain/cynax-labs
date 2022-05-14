@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Head from 'next/head'
 import { Grid, Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import TicketItem from '../components/molecules/ticket-item';
 import NewTicketDialog from '../components/molecules/new-ticket-dialog';
 import data from '../data.json';
@@ -25,11 +25,6 @@ export default function Home({ fullScreen }) {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Cynax Ticket App</title>
-        <link rel="icon" href="/MH-Logo.ico" />
-      </Head>
-
       <h3 className={styles.heading}>Available Tickets</h3>
       <Grid className={styles.tickets} container spacing={3}>
         {tickets.map((ticket, index) => (
@@ -44,6 +39,7 @@ export default function Home({ fullScreen }) {
         className={styles.addTickets}
         onClick={() => setNewTicketDialog(true)}
       >
+        <AddIcon />
         Add Ticket
       </Button>
       <div className={styles.deleteInfo}>(*Hover the tickets to delete)</div>

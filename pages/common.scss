@@ -5,4 +5,27 @@
 html, body {
   margin: 0;
   padding: 0;
+  position: relative;
+}
+
+.footerNav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.6;
+  transition: ease-in-out 0.25s;
+  background-color: transparent;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .author {
+    max-width: 300px;
+    
+    span {
+      color: #999;
+    }
+  }
 }

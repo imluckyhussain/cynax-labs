@@ -14,6 +14,8 @@ import {
   InputLabel,
   Slide,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 import styles from './new-ticket-dialog.module.scss';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -26,6 +28,7 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
   const [errorText, setErrorText] = useState('');
+  const [savingFlag, setSavingFlag] = useState(false);
 
   const resetDialog = () => {
     onClose();
@@ -34,10 +37,11 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
     setQuantity(0);
     setUnitPrice(0);
     setErrorText('');
+    setSavingFlag(false);
   };
 
   const handleSubmit = () => {
-    if (type && product && quantity && unitPrice) {
+    if (type && product && quantity > 0 && unitPrice > 0) {
       onSubmit({
         type,
         product,
@@ -46,8 +50,16 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
       });
       resetDialog();
     } else {
-      setErrorText('Please fill all the fields!');
+      setErrorText('Please fill all the fields with valid inputs!');
     }
+  };
+
+  const saveTicket = async () => {
+    await setSavingFlag(true);
+    setTimeout(async () => {
+      await setSavingFlag(false);
+      handleSubmit();
+    }, 1000);
   };
 
   return (
@@ -84,13 +96,23 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
         <FormGroup className={styles.formGroup}>
           <FormControl variant="filled">
             <InputLabel htmlFor="quantity">Quantity</InputLabel>
-            <Input type="number" id="quantity" defaultValue={quantity} onChange={e => setQuantity(e.target.value)} />
+            <Input
+              type="number"
+              id="quantity"
+              defaultValue={quantity}
+              onChange={e => setQuantity(e.target.value)}
+            />
           </FormControl>
         </FormGroup>
         <FormGroup className={styles.formGroup}>
           <FormControl variant="filled">
             <InputLabel htmlFor="unitPrice">Unit Price</InputLabel>
-            <Input type="number" id="unitPrice" defaultValue={unitPrice} onChange={e => setUnitPrice(e.target.value)} />
+            <Input
+              type="number"
+              id="unitPrice"
+              defaultValue={unitPrice}
+              onChange={e => setUnitPrice(e.target.value)}
+            />
           </FormControl>
         </FormGroup>
       </DialogContent>
@@ -101,13 +123,16 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
       )}
       <DialogActions>
         <Button onClick={resetDialog}>Cancel</Button>
-        <Button
-          color="primary"
+        <LoadingButton
+          loading={savingFlag}
+          loadingPosition="start"
+          startIcon={<SaveIcon />}
           variant="contained"
-          onClick={handleSubmit}
+          color="primary"
+          onClick={saveTicket}
         >
           Save Ticket
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   )

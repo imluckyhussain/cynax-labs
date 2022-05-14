@@ -1,5 +1,7 @@
 import './common.scss';
-import { useMediaQuery } from '@mui/material/';
+import Head from 'next/head'
+import { useMediaQuery, BottomNavigation, BottomNavigationAction } from '@mui/material/';
+import CodeIcon from '@mui/icons-material/Code';
 import {
   useTheme,
   createTheme,
@@ -28,7 +30,22 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={lightTheme}>
+      <Head>
+        <title>Cynax Ticket App | Mubaraque Hussain</title>
+        <link rel="icon" href="/MH-Logo.ico" />
+      </Head>
+
       <Component { ...{ ...pageProps, fullScreen } } />
+
+      <BottomNavigation showLabels value={'author'} className="footerNav">
+        <BottomNavigationAction
+          label="Developed by Mubaraque Hussain"
+          icon={<CodeIcon />}
+          value={'author'}
+          className="author"
+          onClick={() => window.open('https://imhussa.in', '_blank')}
+        />
+      </BottomNavigation>
     </ThemeProvider>
   )
 }
