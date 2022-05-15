@@ -17,12 +17,10 @@ export default function Home({ fullScreen }) {
   const deleteHandler = index => {
     tickets.splice(index, 1);
     setTickets([...tickets]);
-    console.log(index, 'deleted', tickets);
   };
 
   const addHandler = newTicket => {
     setTickets([...tickets, newTicket]);
-    console.log(newTicket, 'added', tickets);
   };
 
   return (
@@ -52,14 +50,16 @@ export default function Home({ fullScreen }) {
         onSubmit={addHandler}
       />
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6} lg={6}>
-          <SingleBarChart data={tickets} />
+      {tickets && tickets.length ? (
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} lg={6}>
+            <SingleBarChart data={tickets} />
+          </Grid>
+          <Grid item xs={12} md={6} lg={6}>
+            <MultiBarChart data={tickets} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
-          <MultiBarChart data={tickets} />
-        </Grid>
-      </Grid>
+      ) : null}
     </div>
   )
 }

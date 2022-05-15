@@ -9,21 +9,21 @@ const options = {
 };
 
 const groupBy = (data, type) => data.reduce(
-    (result, item) => ({
-      ...result,
-      [item[type]]: [
-        ...(result[item[type]] || []),
-        item,
-      ],
-    }), 
-    {},
-  );
+  (result, item) => ({
+    ...result,
+    [item[type]]: [
+      ...(result[item[type]] || []),
+      item,
+    ],
+  }), 
+  {},
+);
 
 export default function SingleBarChart({ data }) {
   const groupData = groupBy(data, 'type');
   const newData = [
     ["", "Drinks", "Food"],
-    ["", groupData.drinks.length, groupData.food.length],
+    ["", groupData.drinks ? groupData.drinks.length : 0, groupData.food ? groupData.food.length : 0],
   ];
 
   return (
