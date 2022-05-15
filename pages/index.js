@@ -42,7 +42,9 @@ export default function Home({ fullScreen }) {
         <AddIcon />
         Add Ticket
       </Button>
-      <div className={styles.deleteInfo}>(*Hover the tickets to delete)</div>
+      {tickets && tickets.length ? (
+        <div className={styles.deleteInfo}>(*Hover the tickets to delete)</div>
+      ) : null}
       <NewTicketDialog
         open={newTicketDialog}
         fullScreen={fullScreen}
