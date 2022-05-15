@@ -3,6 +3,8 @@ import { Grid, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import TicketItem from '../components/molecules/ticket-item';
 import NewTicketDialog from '../components/molecules/new-ticket-dialog';
+import SingleBarChart from '../components/molecules/single-bar-chart';
+import MultiBarChart from '../components/molecules/multi-bar-chart';
 import data from '../data.json';
 import styles from './home.module.scss';
 
@@ -49,6 +51,15 @@ export default function Home({ fullScreen }) {
         onClose={() => setNewTicketDialog(false)}
         onSubmit={addHandler}
       />
+
+      <Grid className={styles.charts} container spacing={3}>
+        <Grid item xs={12} md={6} lg={6}>
+          <SingleBarChart data={tickets} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          <MultiBarChart data={tickets} />
+        </Grid>
+      </Grid>
     </div>
   )
 }

@@ -84,7 +84,7 @@ export default function NewTicketDialog({ fullScreen, open, onClose, onSubmit })
             <Select
               labelId="type-label"
               id="type"
-              defaultValue={type}
+              value={type}
               label="Type"
               onChange={e => setType(e.target.value)}
             >
