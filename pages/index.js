@@ -52,7 +52,7 @@ export default function Home({ fullScreen }) {
         onSubmit={addHandler}
       />
 
-      <Grid className={styles.charts} container spacing={3}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={6} lg={6}>
           <SingleBarChart data={tickets} />
         </Grid>

@@ -2,9 +2,10 @@ import { Chart } from "react-google-charts";
 
 const options = {
   title: "Number of Tickets Available",
-  chartArea: { width: "60%", height: 50 },
+  chartArea: { width: "80%", height: 50 },
   isStacked: true,
-  colors: ['#0EBAFE', '#FF9FB1'],
+  legend: { position: "bottom" },
+  colors: ['#5E7BFD', '#FF9FB1'],
 };
 
 const groupBy = (data, type) => data.reduce(
@@ -22,7 +23,7 @@ export default function SingleBarChart({ data }) {
   const groupData = groupBy(data, 'type');
   const newData = [
     ["", "Drinks", "Food"],
-    ["Tickets", groupData.drinks.length, groupData.food.length],
+    ["", groupData.drinks.length, groupData.food.length],
   ];
 
   return (

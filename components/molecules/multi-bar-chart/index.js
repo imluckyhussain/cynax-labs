@@ -5,7 +5,7 @@ const options = {
   chartArea: { width: "60%", height: 100 },
   isStacked: 'percent',
   bars: 'vertical',
-  colors: ['#0EBAFE', '#FF9FB1'],
+  colors: ['#5E7BFD', '#FF9FB1'],
 };
 
 const groupBy = (data, type) => data.reduce(
